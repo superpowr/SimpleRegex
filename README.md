@@ -1,6 +1,6 @@
-## Regularity - Regular expressions for humans
+## SimpleRegex - Regular expressions for humans
 
-Regularity is a friendly regular expression builder for Ruby. Regular expressions are a powerful way of
+SimpleRegex is a friendly regular expression builder for Ruby. Regular expressions are a powerful way of
 pattern-matching against text, but too often they are 'write once, read never'. After all, who wants to try and deciper
 
 ```ruby
@@ -10,7 +10,7 @@ pattern-matching against text, but too often they are 'write once, read never'. 
 when you could express it as:
 
 ```ruby
-Regularity.new
+SimpleRegex.new
   .start_with(3, :digits)
   .then('-')
   .then(2, :letters)
@@ -20,17 +20,17 @@ Regularity.new
   .end_with('$')
 ```
 
-While taking up a bit more space, Regularity expressions are much more readable than their cryptic counterparts.
+While taking up a bit more space, SimpleRegex expressions are much more readable than their cryptic counterparts.
 
 ### Installation
 
 ```
-gem install regularity
+gem install simple_regex
 ```
 
 ### Usage
 
-Regularity objects are just plain ol Ruby objects that act like regexes - `method_missing` delegates to a regex object,
+SimpleRegex objects are just plain ol Ruby objects that act like regexes - `method_missing` delegates to a regex object,
 so you can go ahead and call `=~` and `match` and [all your other favorite methods](http://www.ruby-doc.org/core-1.9.3/Regexp.html)
 on them and it will just work <sup>TM</sup>
 
@@ -77,8 +77,10 @@ The following methods are supported:
 
 `at_most(n, pattern)`: Specify that the pattern or identifer should appear n or less times
 
-The DSL methods are chainable, meaning they return `self`. You can also call `regex` on a Regularity object to
+The DSL methods are chainable, meaning they return `self`. You can also call `regex` on a SimpleRegex object to
 return a RegExp object created from the specified pattern.
 
-### Status
-[![Build Status](https://travis-ci.org/andrewberls/regularity.png)](https://travis-ci.org/andrewberls/regularity)
+Credit
+---
+
+* [Regularity](https://github.com/andrewberls/regularity)

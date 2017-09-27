@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Regularity do
+describe SimpleRegex do
 
-  let(:re) { Regularity.new }
+  let(:re) { SimpleRegex.new }
 
   context 'regex methods' do
     it 'responds to regex methods' do
@@ -36,7 +36,7 @@ describe Regularity do
   it 'raises an error when called twice' do
     expect do
       re.start_with('x').start_with('x')
-    end.to raise_error(Regularity::Error)
+    end.to raise_error(SimpleRegex::Error)
   end
 
   context '#append' do
@@ -58,7 +58,7 @@ describe Regularity do
     it 'raises an error after ending' do
       expect do
         re.end_with('x').append('y')
-      end.to raise_error(Regularity::Error)
+      end.to raise_error(SimpleRegex::Error)
     end
   end
 
@@ -70,7 +70,7 @@ describe Regularity do
       (re =~ "xz").should == 0
     end
   end
-  
+
   context '#not' do
     it 'creates a negative lookahead' do
       re.append('x').not('y').append('z')
@@ -96,14 +96,14 @@ describe Regularity do
 
   context '#at_least' do
 	it 'creates a repetition of n times at least' do
-      re = Regularity.new.at_least(3, 'x')
+      re = SimpleRegex.new.at_least(3, 'x')
       re.get.should == /x{3,}/
     end
   end
 
   context '#at_most' do
 	it 'creates a repetition of n times at most' do
-      re = Regularity.new.at_most(3, 'x')
+      re = SimpleRegex.new.at_most(3, 'x')
       re.get.should == /x{,3}/
     end
   end
@@ -146,7 +146,7 @@ describe Regularity do
     it 'raises an error when called twice' do
       expect do
         re.end_with('x').end_with('x')
-      end.to raise_error(Regularity::Error)
+      end.to raise_error(SimpleRegex::Error)
     end
   end
 
