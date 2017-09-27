@@ -1,4 +1,4 @@
-class Regularity
+class SimpleRegex
 
   class Error < StandardError; end
 
@@ -23,7 +23,7 @@ class Regularity
   end
 
   def start_with(*args)
-    raise Regularity::Error.new('#start_with? called multiple times') unless @str.empty?
+    raise SimpleRegex::Error.new('#start_with? called multiple times') unless @str.empty?
     write '^%s', args
   end
 
@@ -52,7 +52,7 @@ class Regularity
 
   def between(range, pattern)
     unless range.length == 2 && range.any? { |i| i.is_a?(Integer) }
-      raise Regularity:Error.new('must provide an array of 2 elements, one of them must be an integer')
+      raise SimpleRegex:Error.new('must provide an array of 2 elements, one of them must be an integer')
     end
 
     write '%s{%s,%s}' % [interpret(pattern), range[0], range[1]]
@@ -92,7 +92,7 @@ class Regularity
   end
 
   def to_s
-    "#<Regularity:#{object_id} regex=/#{@str}/>"
+    "#<SimpleRegex:#{object_id} regex=/#{@str}/>"
   end
 
   def inspect
@@ -102,7 +102,7 @@ class Regularity
   private
 
   def write(str, args=nil)
-    raise Regularity::Error.new('#end_with has already been called') if @ended
+    raise SimpleRegex::Error.new('#end_with has already been called') if @ended
     @str << (args.nil? ? str : str % interpret(*args))
     self
   end
@@ -119,7 +119,7 @@ class Regularity
   # Ex: (2, 'x') or (3, :digits)
   def numbered_constraint(count, type)
     pattern = patterned_constraint(type)
-    raise Regularity::Error.new('Unrecognized pattern') if pattern.nil? || pattern.empty?
+    raise SimpleRegex::Error.new('Unrecognized pattern') if pattern.nil? || pattern.empty?
     '%s{%s}' % [pattern, count]
   end
 
